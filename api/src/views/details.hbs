@@ -1,0 +1,70 @@
+
+<div class="container d-flex align-items-center justify-content-center mt-4">
+    <form action="/product/cart" method="POST">
+        <div class="card" style="width: 26rem;">
+            <img class="card-img-top" src="{{message.product_img}}" alt="Card image cap">
+            <div class="card-body">
+                <h3 class="text-center">{{message.product_name}}</h3>
+                <p>{{message.product_description}}</p>
+                
+                <input name="product_id" type="text" value ="{{message.id}}" hidden>
+                <input name="product_img" type="text" value ="{{message.product_img}}" hidden>
+                <input name="product_name" type="text" value ="{{message.product_name}}" hidden>
+                <input name="product_description" type="text" value ="{{message.product_description}}" hidden>
+
+
+                <div class="input-group d-flex align-items-center mt-4">
+                    <label class="label" for="product_quantity">Quantity</label>
+                    <input id="product_quantity" name="product_quantity" type="number" value = 1>
+                </div>
+
+                <div class="input-group d-flex align-items-center mt-4">
+                    <label class="label" for="product_price">Price</label>
+                    <input id="product_price" name="product_price" type="number" value ="{{message.product_price}}">
+                    <label class="ml-4 text-success">$</label>
+                </div>
+
+                <div class="input-group d-flex align-items-center mt-4">
+                    <label class="label" for="product_total">Total</label>
+                    <input id="product_total" name="product_total" type="number" value= "{{message.product_price}}">
+                    <label class="ml-4 text-success">$</label>
+                </div>
+
+                <div class="mt-4 d-flex align-items-center justify-content-between">
+                    <a class="btn btn-warning" href="http://localhost:6789/product/all">Back to product</a>
+                    <button type="submit" class="btn btn-success">
+                         Add too Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    .input-product-details{
+       flex: 1;
+    }
+    .label{
+        min-width: 100px;
+    }
+</style>
+
+<script>
+    const quantity = document.querySelector('#product_quantity')
+    const price = document.querySelector('#product_price')
+    const total = document.querySelector('#product_total')
+
+    const quantityProduct = {{message.product_quantity}}
+
+
+    quantity.oninput= (() =>{
+        total.value = Number(quantity.value) * Number(price.value)
+    })  
+
+    quantity.onblur = (() => {
+        if(Number(quantity.value) > quantityProduct){
+            alert('Error')
+        }
+    })
+</script>

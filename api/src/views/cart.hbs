@@ -1,0 +1,90 @@
+<ul class="list-group mt-4">
+  <li class="list-group-item bg-success text-white">List Cart</li>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Subtotal</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each message}}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{product_name}}</td>
+            <td>{{product_price}}</td>
+            <td>
+                <input id="{{id}}" class="cart-product_quantity" type="number" value="{{product_quantity}}">
+            </td>
+            <td class="total-cart">
+                <input class="cart-product_total-{{id}}-show" type="number" value="{{product_total}}">
+            </td>
+            <td class="d-flex">
+                <form action="/product/cart/update/{{id}}" method="POST">
+                    <input name="product_name" type="text" value="{{product_name}}" hidden>  
+                    <input class="cart-product_quantity-{{id}}" name="product_quantity" type="number" value="{{product_quantity}}" hidden>  
+                    <input class="cart-product_total-{{id}}-send" name="product_total" type="number" value="{{product_total}}" hidden>
+                    <input class="cart-product_price-{{id}}" name="product_price" type="number" value="{{product_price}}" hidden>
+                    <input class="cart-old_product_quantity-{{id}}" name="old_product_quantity" type="number" value="{{old_product_quantity}}" hidden>
+                    <button type="submit" class="btn btn-info">Update</button>
+                </form>
+                <form class="ml-4" action="/product/cart/delete/{{id}}" method="POST">
+                    <input type="text" name="old_product_quantity" value="{{old_product_quantity}}" hidden>
+                    <input type="text" name="product_name" value="{{product_name}}" hidden>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {{/each}}  
+  </tbody>
+</table>
+
+<style>
+    .product-img{
+        width: 60px;
+        height: 60px;
+    }
+    .context{
+        min-width: 600px;
+    }
+    .product-btn{
+        display: block;
+    }
+    .product-quantity{
+        height: 24px;
+    }
+</style>
+
+<script>
+    const quantities = document.querySelectorAll('.cart-product_quantity')
+
+    quantities.forEach((quantity) => {
+
+        const price = document.querySelector(`.cart-product_price-${quantity.id}`)
+        const old_quantity = document.querySelector(`.cart-old_product_quantity-${quantity.id}`)
+        const show_total = document.querySelector(`.cart-product_total-${quantity.id}-show`)
+        const product_quantity = document.querySelector(`.cart-product_quantity-${quantity.id}`)
+        const total_send = document.querySelector(`.cart-product_total-${quantity.id}-send`)
+       
+        quantity.oninput = ( () => {
+
+            show_total.value = Number(price.value) * Number(quantity.value)
+
+            product_quantity.value = quantity.value
+            total_send.value = show_total.value
+
+        })
+
+        quantity.onblur = ( () => {
+            if(Number(quantity.value) > Number(old_quantity.value)){
+                alert('Error')
+            }
+        })
+    })
+
+</script>

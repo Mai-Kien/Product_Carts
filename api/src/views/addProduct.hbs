@@ -1,0 +1,58 @@
+
+<div class="container d-flex align-items-center justify-content-center mt-4">
+    <form action="/product/create" method="POST">
+        <div class="card" style="width: 26rem;">
+            <div class="card-body">
+
+                <div class="input-group d-flex align-items-center mt-4">
+                    <label class="label" for="product_name">Product Name</label>
+                    <input id="product_name" name="product_name" type="text">
+                </div>
+
+                <div class="input-group d-flex align-items-center mt-4">
+                    <label class="label" for="product_img">Product Image</label>
+                    <input id="product_img" name="product_img" type="text">
+                </div>
+
+                <div class="input-group d-flex align-items-center mt-4">
+                    <label class="label" for="product_description">Product Description</label>
+                    <input id="product_description" name="product_description" type="text">
+                </div>
+
+                <div class="input-group d-flex align-items-center mt-4">
+                    <label class="label" for="product_quantity">Quantity</label>
+                    <input id="product_quantity" name="product_quantity" type="number">
+                </div>
+
+                <div class="input-group d-flex align-items-center mt-4">
+                    <label class="label" for="product_price">Price</label>
+                    <input id="product_price" name="product_price" type="number">
+                    <label class="ml-4 text-success">$</label>
+                </div>
+
+                <div class="input-group d-flex align-items-center mt-4">
+                    <label class="label" for="product_total">Total</label>
+                    <input id="product_total" name="product_total" type="number">
+                    <label class="ml-4 text-success">$</label>
+                </div>
+
+                <div class="mt-4 d-flex align-items-center justify-content-between">
+                    <a class="btn btn-warning" href="http://localhost:6789/product/all">Back to product</a>
+                    <button type="submit" class="btn btn-success">
+                         Add too Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    .input-product-details{
+       flex: 1;
+    }
+    .label{
+        min-width: 100px;
+        max-width: 100px;
+    }
+</style>

@@ -1,0 +1,38 @@
+<ul class="list-group mt-4">
+  <li class="list-group-item bg-success text-white">List Product</li>
+{{#each message}}
+ <form action="/product/{{id}}" method="GET">
+    <li class="d-flex justify-content-around align-items-center list-group-item">
+        <img class="product-img" src="{{product_img}}" alt="{{product_name}}"> 
+        <div class="context">
+            <h3 name="product_name">{{product_name}}</h3>
+            <p name="product_description">{{product_description}}</p>
+        </div>
+        <input name="product_quantity" class="product-quantity" type="number" value="{{product_quantity}}">
+        <div>
+            <button type="submit" class="btn btn-info product-btn mb-4" data-toggle="modal">Add</button>
+            <button type="button" class="btn btn-success product-btn" >$ {{product_price}}</button>
+        </div>
+    </li>
+</form>
+{{/each}}  
+<li class="list-group-item text-white">
+    <a class="btn btn-primary" href="/product/form/create/product" role="button">Create new product</a>
+</li>
+</ul> 
+
+<style>
+    .product-img{
+        width: 60px;
+        height: 60px;
+    }
+    .context{
+        min-width: 600px;
+    }
+    .product-btn{
+        display: block;
+    }
+    .product-quantity{
+        height: 24px;
+    }
+</style>
